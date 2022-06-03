@@ -74,16 +74,7 @@ export class ProductComponent implements AfterViewInit {
       });
   }
   isAdmin:boolean=false;
-  AddProductForm=new FormGroup({
-    Name : new FormControl('',[Validators.required]),
-    Code : new FormControl('',[Validators.required]),
-    Price : new FormControl('',[Validators.required]),
-    ImageUrl : new FormControl('',[Validators.required]),
-    Origin : new FormControl('',[Validators.required]),
-    Category : new FormControl('',[Validators.required]),
-    Description : new FormControl(''),
-  })
-  
+  spinnerShow:boolean=false;
   formCode:string='';
   edit(a:string){
     this.formCode=a;

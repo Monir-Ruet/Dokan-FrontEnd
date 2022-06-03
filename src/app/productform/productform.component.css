@@ -8,3 +8,8 @@ mat-form-field{
 .file-name {
     margin-left: 1rem; /* or whatever margin you require */
 }
+
+.spinner{
+    display: flex;
+    justify-content: center;
+}

@@ -1,5 +1,8 @@
-
-<form [formGroup]="AddProductForm" (ngSubmit)="onUpload()">
+<div class="spinner">
+  <mat-spinner  *ngIf="spinnerShow"></mat-spinner>
+</div>
+<div class="container-fluid" *ngIf="!spinnerShow">
+  <form [formGroup]="AddProductForm" (ngSubmit)="onUpload()">
     <mat-form-field  appearance="outline">
       <mat-label>Name</mat-label>
       <input id="User" matInput placeholder="Enter a name..." formControlName="Name" autocomplete="off">
@@ -38,7 +41,8 @@
 
     <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="!blockRoute()">Add</button>
     <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="blockRoute()">Update</button>
-  </form>
+  </form><br>
   <div>
-    <span *ngIf="this.errorShow">{{this.Errormessage}}</span>
+    <span *ngIf="this.errorShow" class="text-success">{{this.Errormessage}}</span>
   </div>
+</div>

@@ -13,11 +13,17 @@ export class ProductformComponent implements OnInit {
   constructor(private productservice:ProductService,public router:Router) { 
   }
   
+
   AddProductForm:FormGroup={} as any;
+  spinnerShow:boolean=true;
   ngOnInit(): void {
-    if(!this.blockRoute()) this.createFromGroup('','','','','','','');
+    if(!this.blockRoute()){
+      this.spinnerShow=false;
+      this.createFromGroup('','','','','','','');
+    }
     else {
         this.productservice.get(this.formCode).subscribe((data)=>{
+          this.spinnerShow=false;
           this.createFromGroup(data.Name,data.Code,data.Price,data.ImageUrl,data.Origin,data.Category,data.Description);
         })
         this.createFromGroup('','','','','','','');

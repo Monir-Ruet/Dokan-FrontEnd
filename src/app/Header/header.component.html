@@ -56,8 +56,8 @@
 
   <div class="collapse navbar-collapse d-md-none" id="navbarsExample04">
     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a routerLink="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a *ngIf="this.User.Role==='Admin'" routerLink="/products" class="nav-link px-2 link-dark">Products</a></li>
-        <li><a *ngIf="!(this.User.Role==='Admin')" routerLink="/mycart" class="nav-link px-2 link-dark">Orders</a></li>
+        <li><a routerLink="/" class="nav-link px-2 link-secondary" [ngClass]=" (router.url=='/')? 'text-secondary':'text-black' ">Home</a></li>
+        <li><a *ngIf="this.User.Role==='Admin'" routerLink="/products" class="nav-link px-2 link-dark" [ngClass]=" (router.url=='/products' || router.url=='/products/create')? 'text-secondary':'text-black' ">Products</a></li>
+        <li><a *ngIf="!(this.User.Role==='Admin')" routerLink="/mycart" class="nav-link px-2 link-dark" [ngClass]=" (router.url=='/mycart')? 'text-secondary':'text-black' ">Orders</a></li>
     </ul>
   </div>

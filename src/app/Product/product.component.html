@@ -4,7 +4,7 @@
   </div><br>
   
   <div *ngIf="checkRole()">
-    <div class="container">
+    <div class="container-fluid">
       <div class="text-end"><mat-icon class="add_box" routerLink="/products/create">add_box</mat-icon></div>
     <div class="example-container mat-elevation-z8">
       <div class="example-loading-shade"
@@ -15,7 +15,6 @@
         </div>
       </div>
       <div class="example-table-container">
-  
         <table mat-table [dataSource]="data" class="example-table"
               matSort matSortActive="Name" matSortDisableClear matSortDirection="desc">
           <!-- Number Column -->
@@ -71,7 +70,7 @@
         </table>
       </div>
   
-      <mat-paginator [length]="resultsLength" [pageSize]="10" aria-label="Select page of GitHub search results"></mat-paginator>
+      <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
     </div>
     </div>
   </div>
