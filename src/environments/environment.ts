@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  Api:'https://backend-dokan.azurewebsites.net'
+  Api:'http://backend-dokan.azurewebsites.net'
 };
 /*
  * For easier debugging in development mode, you can import the following file
