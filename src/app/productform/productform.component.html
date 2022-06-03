@@ -1,0 +1,44 @@
+
+<form [formGroup]="AddProductForm" (ngSubmit)="onUpload()">
+    <mat-form-field  appearance="outline">
+      <mat-label>Name</mat-label>
+      <input id="User" matInput placeholder="Enter a name..." formControlName="Name" autocomplete="off">
+    </mat-form-field>
+    <div *ngIf="!AddProductForm.controls['Name'].valid && (AddProductForm.controls['Name'].dirty || AddProductForm.controls['Name'].touched)">Enter a Product Name.</div>
+    <mat-form-field  appearance="outline">
+      <mat-label>Product Code</mat-label>
+      <input matInput placeholder="Enter product code..." formControlName="Code" autocomplete="off">
+    </mat-form-field>
+    <div *ngIf="!AddProductForm.controls['Code'].valid && (AddProductForm.controls['Code'].dirty || AddProductForm.controls['Code'].touched)">Enter a Product Code.</div>
+    <mat-form-field  appearance="outline">
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="Enter Price..." formControlName="Price" autocomplete="off">
+    </mat-form-field>
+    <div *ngIf="!AddProductForm.controls['Price'].valid && (AddProductForm.controls['Price'].dirty || AddProductForm.controls['Price'].touched)">Please enter price & price must be number.</div>
+    <mat-form-field appearance="outline">
+      <mat-label>Origin</mat-label>
+      <input matInput placeholder="Enter Origin..." formControlName="Origin" autocomplete="off">
+    </mat-form-field>
+    <div *ngIf="!AddProductForm.controls['Origin'].valid && (AddProductForm.controls['Origin'].dirty || AddProductForm.controls['Origin'].touched)">Please enter the origin of the product.</div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="Image" *ngIf="!blockRoute()">
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="Category">
+        <mat-option value="Laptop">Laptop</mat-option>
+        <mat-option value="Mobile">Mobile</mat-option>
+        <mat-option value="Desktop">Desktop</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="!AddProductForm.controls['Category'].valid && (AddProductForm.controls['Category'].dirty || AddProductForm.controls['Category'].touched)">Enter a Product Code</div>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="Description" autocomplete="off"></textarea>
+    </mat-form-field><br><br>
+
+    <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="!blockRoute()">Add</button>
+    <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="blockRoute()">Update</button>
+  </form>
+  <div>
+    <span *ngIf="this.errorShow">{{this.Errormessage}}</span>
+  </div>

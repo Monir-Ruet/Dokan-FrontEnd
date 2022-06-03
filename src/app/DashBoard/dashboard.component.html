@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-2">
+        <app-filter></app-filter>
+    </div>
+    <div class="col-12 col-lg-10 text-center">
+      <div class="container-fluid d-flex justify-content-center flex-wrap align-items-center">
+        <div class="example-card" *ngFor="let i of this.Product">
+          <img mat-card-image  src="{{ImageSrc+i.ImageUrl}}" height="150px">
+            <h3 class="title">{{i.Name}}</h3>
+            <p class="Description">{{i.Description}}</p>
+            <div class="d-flex justify-content-between align-bottom">
+              <p >{{i.Price | currency:"USD":"symbol"}}</p>
+              <mat-icon class="shopIcon" (click)="this.AddToCart(i)" *ngIf="!checkRole()">shopping_cart</mat-icon>
+            </div>
+          </div>
+      </div>
+      <mat-spinner class="spinner" *ngIf="spinnerShow"></mat-spinner>
+      <div class="p-3 m-3 btn btn-primary" *ngIf="(this.total<this.totalProduct)" (click)="LoadMore()" style="cursor: pointer;margin:auto;">Show More</div>
+      <br><br>
+    </div>
+  </div>
+</div>
+

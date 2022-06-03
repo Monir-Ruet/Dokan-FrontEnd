@@ -1,0 +1,94 @@
+<div class="container">
+  <main class="form-signin bg-light">
+    <div class="alert alert-danger text-center" *ngIf="!isValidLogin()">
+      <span>Wrong Credential</span><br>
+      <span>Invalid username or password</span>
+    </div>
+    <form [formGroup]="Credential" (ngSubmit)="login()">
+      <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+      <div class="alert alert-success text-center"  *ngIf="SignInMessageShown">
+        <span>{{SignInMessage}}</span><br>
+      </div>
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput  placeholder="Enter a name..." formControlName="username" autocomplete="off" autofocus="on">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input  matInput placeholder="Enter password..." formControlName="password" autocomplete="off">
+          </mat-form-field>
+  
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" formControlName="remember"> Remember me
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form><br>
+      
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-outline-primary" (click)="open(content)">Sign Up</button>
+    </div>
+  </main>
+
+  <ng-template #content let-modal>
+    <!-- Singup Errors -->
+    <div  *ngIf="SignUpSuccess; then success else failed"></div>
+    <ng-template #success>
+      <div class="alert alert-success text-center"  *ngIf="SignUpMessageShown">
+        <span>{{SignUpMessage}}</span><br>
+      </div>
+    </ng-template>
+    <ng-template #failed>
+      <div class="alert alert-danger text-center"  *ngIf="SignUpMessageShown">
+        <span>{{SignUpMessage}}</span><br>
+      </div>
+    </ng-template>
+
+    <!-- SingUp Form -->
+    <div class="signup bg-light">
+      <div class="head" >
+        <span class="close" (click)="modal.close()">&times;</span>
+        <h1 class="text-center">Sign Up</h1>
+        <p>It's quick and easy.</p>
+        <hr>
+      </div>
+      <div class="signup-form">
+        <form [formGroup]="NewUser" (ngSubmit)="Signup()">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput  placeholder="What is your name?" formControlName="fullname" autocomplete="off" autofocus="on">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput  placeholder="Enter a username" formControlName="username" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput  placeholder="Enter a password" formControlName="password" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput  placeholder="Enter is your email" formControlName="email" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput  placeholder="Enter is your phone number" formControlName="phone" autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="outline" >
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+              <mat-option value="Others">Others</mat-option>
+            </mat-select>
+          </mat-form-field>
+            <p>By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.</p><br>
+            <button class="btn btn-success">Sign Up</button>
+          </form>
+        </div>
+    </div>
+  </ng-template>
+</div>
+
+      

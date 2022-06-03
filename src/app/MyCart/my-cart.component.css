@@ -1,0 +1,14 @@
+.table-condensed{
+    font-size: 14px;
+  }
+  
+  mat-icon{
+      font-size: 18px;
+  }
+  .clearIcon:hover{
+      color:red
+  }
+
+  .border-1{
+      width: 50px;
+  }

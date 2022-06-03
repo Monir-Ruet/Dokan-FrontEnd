@@ -1,0 +1,67 @@
+<div class="container">
+    <h1>Shopping Cart</h1>
+    <div class="container-fluid vh-100">
+        <div class="row">
+            <div class="col-sm-12 col-lg-8 bg-light rounded p-3" style="box-shadow: 0px 24px 64px -8px rgb(1 30 63 / 20%);">
+                <div class="container d-flex justify-content-center align-items-center" *ngIf="showEmpty()">
+                    <div class="text-center p-5">
+                        <img src="https://www.graincomevents.com/wp-content/uploads/2021/07/Molti-Empty-Cart.png" width="200px" height="200px">
+                        <h3>Your cart is empty</h3>
+                        <h4>Add something to make me happy</h4>
+                        <button class="btn btn-primary" routerLink="/">Go Shopping ></button>
+                    </div>
+                </div>
+                <div class="container table-responsive" *ngIf="!showEmpty()">
+                    <h2>Cart List</h2>
+                    <table class="table text-dark">
+                        <thead>
+                            <tr>
+                              <th class="text-uppercase text-center overflow-elipsis">Product</th>
+                              <th class="text-uppercase">Price</th>
+                              <th class="text-uppercase">Quantity</th>
+                              <th class="text-uppercase">Subtotal</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr *ngFor="let i of CartProduct">
+                                <td class="row">
+                                    <mat-icon class="col-3 col-2 clearIcon" (click)="removeProduct(i.Product)">clear</mat-icon>
+                                    <img class="col-lg-2 col-md-3 d-none d-md-block" src="{{ImageUrl+i.Product.ImageUrl}}" width="40px" height="25px">
+                                    <span class="col-9 col-lg-8 col-md-7 text-truncate" style="max-width: 400px;">{{i.Product.Name}}</span>
+                                </td>
+                                <td>{{i.Product.Price | currency:'USD'}}</td>
+                                <td>
+                                    <input  name="username" #username type="number" step="1" min="1" value="{{i.Quantity || 1}}" class="border-1 text-center" (change)="updateCart(i.Product.Code,parseNumber(username.value))">
+                                </td>
+                                <td>{{i.Quantity * i.Product.Price}}</td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 p-4" style="background-color: #031d3e;">
+                <div class="container p-4  table-responsive-md" style="background-color: #20344c;border-radius: 10px;">
+                    <h1 class="text-light">Your order</h1>
+                    <table class="table  table-condensed" style="color: #8696A8">
+                        <tbody>
+                            <tr>
+                              <td scope="row">Subtotal</td>
+                              <td class="text-light">{{total()}}</td>
+                            </tr>
+                            <tr>
+                              <td scope="row">Total</td>
+                              <td class="text-light">{{total()}}</td>
+                            </tr>
+                          </tbody>
+                    </table>
+                    <button type="button" class="btn btn-primary p-3 w-100">Proceed to checkout</button>
+                </div> 
+                <div class="container p-4 mt-2 table-responsive-md" style="background-color: #20344c;border-radius: 10px;">
+                    <h4 class="text-uppercase text-danger">Special offer</h4>
+                    <p class="text-weight-bold text-light">15% OFF all accessories</p>
+                    <button type="button" class="btn btn-light p-3">Shop Sale</button>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
