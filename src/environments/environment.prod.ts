@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  Api:'https://dokan-backend.herokuapp.com'
+  Api:'https://backend-dokan.azurewebsites.net'
 };
