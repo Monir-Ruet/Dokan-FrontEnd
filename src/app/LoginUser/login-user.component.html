@@ -1,3 +1,4 @@
+
 <div class="container">
   <main class="form-signin bg-light">
     <div class="alert alert-danger text-center" *ngIf="!isValidLogin()">
@@ -23,7 +24,7 @@
           <input type="checkbox" value="remember-me" formControlName="remember"> Remember me
         </label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+      <button class="w-100 btn btn-lg btn-primary" type="submit"><mat-spinner class="spinner" color="accent"  [diameter]="30" *ngIf="spinnerShow"></mat-spinner> <span *ngIf="!spinnerShow">Sign In</span></button>
     </form><br>
       
     <div class="d-flex justify-content-center">

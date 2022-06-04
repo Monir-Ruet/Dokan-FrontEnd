@@ -47,14 +47,18 @@ export class LoginUserComponent implements OnInit,OnDestroy {
     return this.validLogin;
   }
 
+  spinnerShow:boolean=false;
   // Login to account
   subscription:any=null!;
   login(){
+    this.spinnerShow=true;
     this.subscription=this.loginService.Login(this.Credential.value).subscribe(result=>{
-      if(!result.LoggedIn && result.Message){
+      this.spinnerShow=false;
+      if(!result.LoggedIn){
         this.SignInMessageShown=true;
         this.SignInMessage=result.Message;
-      }else{
+      }
+      else{
         this.SignInMessageShown=false;
         localStorage.setItem('Token',result.Token);
         localStorage.setItem('Role',result.Role);
