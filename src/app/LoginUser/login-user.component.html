@@ -60,14 +60,17 @@
             <mat-label>Name</mat-label>
             <input matInput  placeholder="What is your name?" formControlName="fullname" autocomplete="off" autofocus="on">
           </mat-form-field>
+          <div *ngIf="!NewUser.controls['fullname'].valid && (NewUser.controls['fullname'].dirty || NewUser.controls['fullname'].touched)">Enter a name at least 5 digit</div>
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
             <input matInput  placeholder="Enter a username" formControlName="username" autocomplete="off">
           </mat-form-field>
+          <div *ngIf="!NewUser.controls['username'].valid && (NewUser.controls['username'].dirty || NewUser.controls['username'].touched)">Enter a username at least 5 digit</div>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput  placeholder="Enter a password" formControlName="password" autocomplete="off">
           </mat-form-field>
+          <div *ngIf="!NewUser.controls['password'].valid && (NewUser.controls['password'].dirty || NewUser.controls['password'].touched)">Enter a password at least 6 digit</div>
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput  placeholder="Enter is your email" formControlName="email" autocomplete="off">
@@ -85,7 +88,7 @@
             </mat-select>
           </mat-form-field>
             <p>By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.</p><br>
-            <button class="btn btn-success">Sign Up</button>
+            <button class="btn btn-success" [disabled]="!NewUser.valid">Sign Up</button>
           </form>
         </div>
     </div>

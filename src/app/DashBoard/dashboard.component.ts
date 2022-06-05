@@ -63,6 +63,7 @@ export class DashboardComponent implements OnInit ,OnDestroy{
     .subscribe();
   }
   LoadMore(){
+    this.spinnerShow=true;
     this.page++;
     this.FetchFilter();
   }

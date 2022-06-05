@@ -1,11 +1,8 @@
 
 .example-card {
-    /* max-width: 280px; */
+    width: 280px;
     margin: 10px;
     cursor: pointer;
-    /* box-shadow: 15px 17px 34px 1px rgba(0,0,0,0.61);
-    -webkit-box-shadow: 15px 17px 34px 1px rgba(0,0,0,0.61);
-    -moz-box-shadow: 15px 17px 34px 1px rgba(0,0,0,0.61); */
 }
 
 .Description{
@@ -34,10 +31,10 @@
 }
 
 .spinner{
-    position:absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
-    translate: transform(50%,50%);
+    transform: translate(-50%, -50%);
 }
 
 @media only screen and (min-width: 1000px) {

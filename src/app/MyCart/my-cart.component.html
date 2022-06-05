@@ -26,7 +26,7 @@
                             <tr *ngFor="let i of CartProduct">
                                 <td class="row">
                                     <mat-icon class="col-3 col-2 clearIcon" (click)="removeProduct(i.Product)">clear</mat-icon>
-                                    <img class="col-lg-2 col-md-3 d-none d-md-block" src="{{ImageUrl+i.Product.ImageUrl}}" width="40px" height="25px">
+                                    <img class="col-lg-2 col-md-3 d-none d-md-block" src="{{i.Product.ImageUrl}}" width="40px" height="25px">
                                     <span class="col-9 col-lg-8 col-md-7 text-truncate" style="max-width: 400px;">{{i.Product.Name}}</span>
                                 </td>
                                 <td>{{i.Product.Price | currency:'USD'}}</td>

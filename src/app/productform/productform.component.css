@@ -13,3 +13,7 @@ mat-form-field{
     display: flex;
     justify-content: center;
 }
+
+.spin{
+	margin: auto;
+}

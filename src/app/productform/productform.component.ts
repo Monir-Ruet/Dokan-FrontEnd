@@ -16,6 +16,7 @@ export class ProductformComponent implements OnInit {
 
   AddProductForm:FormGroup={} as any;
   spinnerShow:boolean=true;
+  spinner:boolean=false;
   ngOnInit(): void {
     if(!this.blockRoute()){
       this.spinnerShow=false;
@@ -38,7 +39,7 @@ export class ProductformComponent implements OnInit {
       Origin : new FormControl(Origin,[Validators.required]),
       Category : new FormControl(Category,[Validators.required]),
       Description : new FormControl(Description),
-      Image:new FormControl('',[Validators.required])
+      ImageUrl:new FormControl(ImageUrl,[Validators.required])
     })
   }
 
@@ -46,29 +47,14 @@ export class ProductformComponent implements OnInit {
     return !(this.router.url==='/products/create');
   }
 
-  selectedFile:File=null!;
-  onFileSelected(event:any){
-    this.selectedFile=event.target.files[0];
-  }
-
-  formdata:FormData=null!;
-  getFormData():FormData{
-    const formdata=new FormData();
-    formdata.append('Name',this.AddProductForm.value.Name);
-    formdata.append('Code',this.AddProductForm.value.Code);
-    formdata.append('Price',this.AddProductForm.value.Price);
-    formdata.append('Origin',this.AddProductForm.value.Origin);
-    formdata.append('Category',this.AddProductForm.value.Category);
-    formdata.append('Description',this.AddProductForm.value.Description);
-    if(this.selectedFile!=null)
-    formdata.append('Image',this.selectedFile);
-    return formdata;
-  }
+  add:boolean=false;
 
   onUpload(){
-    this.formdata=this.getFormData();
-    if(this.formdata.has('Image')){
-      this.productservice.AddProduct(this.formdata).subscribe((data)=>{
+    this.spinner=true;
+    if(this.add){
+      this.AddProductForm.value.Code=this.AddProductForm.value.Code.replace(/\s+/g, '-');
+      this.productservice.AddProduct(this.AddProductForm.value).subscribe((data)=>{
+        this.spinner=false;
         this.Errormessage=data.massage;
         this.errorShow=true;
         setTimeout(() => {
@@ -77,8 +63,10 @@ export class ProductformComponent implements OnInit {
       })
     }else{
       this.productservice.UpdateProduct(this.AddProductForm.value).subscribe((data)=>{
+        this.spinner=false;
         if(data.Status){
           this.productservice.notifyProduct();
+          this.productservice.notice(this.AddProductForm.value.Code);
         }
         this.Errormessage=data.Message;
         this.errorShow=true;

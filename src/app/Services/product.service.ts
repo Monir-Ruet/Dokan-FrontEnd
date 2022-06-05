@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ProductApi,AddProductResponse, Products, UpdateResponse ,DeleteResponse} from '../Interfaces/interface';
 import { SortDirection } from '@angular/material/sort';
@@ -7,17 +7,14 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService implements OnDestroy {
 
   constructor(private Http : HttpClient) {}
   private s=new BehaviorSubject<boolean>(false);
   isUpdated= this.s.asObservable();
 
   AddProduct(data:object){
-    const httpOptions = {
-      headers: new HttpHeaders().delete('Content-Type')
-    };
-    return this.Http.post<AddProductResponse>(`${environment.Api}/products/add`,data,httpOptions);
+    return this.Http.post<AddProductResponse>(`${environment.Api}/products/add`,data);
   }
 
   Fetch(sort: string, order: SortDirection, page: number): Observable<ProductApi> {
@@ -55,5 +52,15 @@ export class ProductService {
   }
   resetFilter(){
     this.filterObject={};
+  }
+  noticeSubscriber:any=null!;
+  notice(product:string){
+    const requestUrl = `${environment.Api}/notify`;
+    this.noticeSubscriber=this.Http.post<any>(requestUrl,{"Code":product}).subscribe((data:any)=>{
+      this.noticeSubscriber.unsubscribe();
+    });
+  }
+  ngOnDestroy(): void {
+    this.noticeSubscriber.unsubscribe();
   }
 }

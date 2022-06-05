@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { UserService } from '../Services/user.service';
+import { min } from 'rxjs';
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
@@ -27,16 +28,16 @@ export class LoginUserComponent implements OnInit,OnDestroy {
   Credential=new FormGroup({
     username:new FormControl(''),
     password:new FormControl(''),
-    remember:new FormControl(false)
+    remember:new FormControl(true)
   })
 
   NewUser=new FormGroup({
-    fullname:new FormControl(''),
-    username:new FormControl(''),
-    password:new FormControl(''),
-    phone:new FormControl(''),
-    email:new FormControl(''),
-    gender:new FormControl(''),
+    fullname:new FormControl('',[Validators.required,Validators.minLength(5)]),
+    username:new FormControl('',[Validators.required,Validators.minLength(5)]),
+    password:new FormControl('',[Validators.required,Validators.minLength(6)]),
+    phone:new FormControl('',[Validators.required]),
+    email:new FormControl('',[Validators.required,Validators.email]),
+    gender:new FormControl('',Validators.required)
 
   })
 
@@ -63,7 +64,7 @@ export class LoginUserComponent implements OnInit,OnDestroy {
         localStorage.setItem('Token',result.Token);
         localStorage.setItem('Role',result.Role);
         this.loginService.LoggedUser();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       }
     })
   }

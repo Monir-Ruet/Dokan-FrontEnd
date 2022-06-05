@@ -2,13 +2,19 @@
   <mat-spinner  *ngIf="spinnerShow"></mat-spinner>
 </div>
 <div class="container-fluid" *ngIf="!spinnerShow">
+  <div *ngIf="!blockRoute()">
+    <h1>Add New Product</h1>
+  </div>
+  <div *ngIf="blockRoute()">
+    <h2>Edit Product '{{this.formCode}}'</h2>
+  </div>
   <form [formGroup]="AddProductForm" (ngSubmit)="onUpload()">
     <mat-form-field  appearance="outline">
       <mat-label>Name</mat-label>
       <input id="User" matInput placeholder="Enter a name..." formControlName="Name" autocomplete="off">
     </mat-form-field>
     <div *ngIf="!AddProductForm.controls['Name'].valid && (AddProductForm.controls['Name'].dirty || AddProductForm.controls['Name'].touched)">Enter a Product Name.</div>
-    <mat-form-field  appearance="outline">
+    <mat-form-field  appearance="outline" *ngIf="!blockRoute()">
       <mat-label>Product Code</mat-label>
       <input matInput placeholder="Enter product code..." formControlName="Code" autocomplete="off">
     </mat-form-field>
@@ -23,7 +29,10 @@
       <input matInput placeholder="Enter Origin..." formControlName="Origin" autocomplete="off">
     </mat-form-field>
     <div *ngIf="!AddProductForm.controls['Origin'].valid && (AddProductForm.controls['Origin'].dirty || AddProductForm.controls['Origin'].touched)">Please enter the origin of the product.</div>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="Image" *ngIf="!blockRoute()">
+    <mat-form-field appearance="outline">
+      <mat-label>ImageUrl</mat-label>
+      <input matInput placeholder="Enter Origin..." formControlName="ImageUrl" autocomplete="off">
+    </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Category</mat-label>
       <mat-select formControlName="Category">
@@ -39,8 +48,8 @@
       <textarea matInput formControlName="Description" autocomplete="off"></textarea>
     </mat-form-field><br><br>
 
-    <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="!blockRoute()">Add</button>
-    <button class="w-100 btn btn-primary" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="blockRoute()">Update</button>
+    <button class="w-100 btn btn-primary p-2" mat-raised-button [disabled]="AddProductForm.invalid && !blockRoute()" *ngIf="!blockRoute()" (click)="this.add=true"><mat-spinner class="spin" color="accent"  [diameter]="35" *ngIf="spinner"></mat-spinner> <span *ngIf="!spinner">Add</span></button>
+    <button class="w-100 btn btn-primary p-2" mat-raised-button [disabled]="AddProductForm.invalid && blockRoute()" *ngIf="blockRoute()"><mat-spinner class="spin" color="accent"  [diameter]="35" *ngIf="spinner"></mat-spinner> <span *ngIf="!spinner">Update</span></button>
   </form><br>
   <div>
     <span *ngIf="this.errorShow" class="text-success">{{this.Errormessage}}</span>
